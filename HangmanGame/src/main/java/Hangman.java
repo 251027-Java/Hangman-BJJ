@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.util.Scanner;
 public class Hangman {
-
     public static void main(String[] args) {
         int count = 0;
         Scanner scanner = new Scanner(System.in);
@@ -11,8 +10,10 @@ public class Hangman {
         System.out.print("Enter a word you want to be guessed: ");
         word = scanner.nextLine();
         guessWord = new char[word.length()];
+        int guesses = word.length();
         for (int i = 0; i < word.length(); i++) {
             System.out.println();
+            System.out.println("Guesses left: " + guesses);
             System.out.print("Enter guess: ");
 
             guess = scanner.next().charAt(0);
@@ -33,7 +34,9 @@ public class Hangman {
                     System.out.print(guessWord[j] + " ");
                 }
             }
+            guesses--;
         }
+        System.out.println("\nYou Lost");
 
     }
 }
