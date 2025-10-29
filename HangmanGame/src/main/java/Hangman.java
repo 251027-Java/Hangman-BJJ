@@ -18,7 +18,7 @@ public class Hangman {
 
             guess = scanner.next().charAt(0);
             for (int j = 0; j < word.length(); j++) {
-                if(guess == word.charAt(j)) {
+                if(guess == word.charAt(j) && guessWord[j] == 0) {
                     guessWord[j] = guess;
                     count++;
                 }
