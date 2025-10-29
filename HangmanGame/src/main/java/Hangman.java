@@ -19,12 +19,13 @@ public class Hangman {
 
         char[] guessWord = new char[word.length()];
         int correctCount = 0;
-        int wrongGuesses = 0;
+        int wrongGuesses = 1;
         int maxGuesses = 7;
 
         while (wrongGuesses < maxGuesses && correctCount < word.length()) {
+            System.out.println(hangman.getHangmanArt(wrongGuesses));
             System.out.println();
-            System.out.println("Wrong guesses: " + wrongGuesses + " / " + maxGuesses);
+            System.out.println("Wrong guesses: " + (wrongGuesses - 1) + " / " + (maxGuesses - 1));
             System.out.print("Current word: ");
             for (char c : guessWord) {
                 System.out.print(c == 0 ? "_ " : c + " ");
@@ -45,7 +46,7 @@ public class Hangman {
 
             if (!correct) {
                 wrongGuesses++;
-                System.out.println(hangman.getHangmanArt(wrongGuesses));
+
             }
 
             if (correctCount == word.length()) {
@@ -53,7 +54,7 @@ public class Hangman {
                 return;
             }
         }
-
+        System.out.println(hangman.getHangmanArt(7));
         System.out.println("\n💀 You lost! The word was: " + word);
     }
 }
