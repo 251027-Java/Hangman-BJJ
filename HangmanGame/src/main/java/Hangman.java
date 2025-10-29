@@ -1,43 +1,50 @@
-import java.awt.*;
 import java.util.Scanner;
+
 public class Hangman {
     public static void main(String[] args) {
-        int count = 0;
         Scanner scanner = new Scanner(System.in);
-        String word;
-        char[] guessWord;
-        char guess;
+        HangmanAscii hangman = new HangmanAscii();
+
         System.out.print("Enter a word you want to be guessed: ");
-        word = scanner.nextLine();
-        guessWord = new char[word.length()];
-        int guesses = word.length();
-        for (int i = 0; i < word.length(); i++) {
+        String word = scanner.nextLine().toLowerCase();
+
+        char[] guessWord = new char[word.length()];
+        int correctCount = 0;
+        int wrongGuesses = 0;
+        int maxGuesses = 7;
+
+        while (wrongGuesses < maxGuesses && correctCount < word.length()) {
             System.out.println();
-            System.out.println("Guesses left: " + guesses);
+            System.out.println("Wrong guesses: " + wrongGuesses + " / " + maxGuesses);
+            System.out.print("Current word: ");
+            for (char c : guessWord) {
+                System.out.print(c == 0 ? "_ " : c + " ");
+            }
+            System.out.println();
+
             System.out.print("Enter guess: ");
+            char guess = Character.toLowerCase(scanner.next().charAt(0));
 
-            guess = scanner.next().charAt(0);
+            boolean correct = false;
             for (int j = 0; j < word.length(); j++) {
-                if(guess == word.charAt(j) && guessWord[j] == 0) {
+                if (word.charAt(j) == guess && guessWord[j] == 0) {
                     guessWord[j] = guess;
-                    count++;
-                }
-                if (count == word.length()) {
-                    System.out.println("You won");
-                    return;
+                    correctCount++;
+                    correct = true;
                 }
             }
-            for (int j = 0; j < word.length(); j++) {
-                if (guessWord[j] == 0) {
-                    System.out.print("_ ");
-                } else {
-                    System.out.print(guessWord[j] + " ");
-                }
-            }
-            guesses--;
-        }
-        System.out.println("\nYou Lost");
 
+            if (!correct) {
+                wrongGuesses++;
+                System.out.println(hangman.getHangmanArt(wrongGuesses));
+            }
+
+            if (correctCount == word.length()) {
+                System.out.println("\n🎉 You won! The word was: " + word);
+                return;
+            }
+        }
+
+        System.out.println("\n💀 You lost! The word was: " + word);
     }
 }
-
