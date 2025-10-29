@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.util.Random;
+import java.util.HashSet;
+import java.util.Set;
 public class Hangman {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -12,6 +14,8 @@ public class Hangman {
                 "stack", "queue", "string", "integer", "boolean",
                 "package", "library", "framework", "scanner", "input"
         };
+        Set<Character> guessedLetters = new HashSet<>();
+
 
         Random rand = new Random();
 
@@ -34,6 +38,14 @@ public class Hangman {
 
             System.out.print("Enter guess: ");
             char guess = Character.toLowerCase(scanner.next().charAt(0));
+
+            if (guessedLetters.contains(guess)) {
+                System.out.println("⚠️ You already guessed '" + guess + "'. Try a different letter!");
+                continue; // skip this round
+            } else {
+                guessedLetters.add(guess);
+            }
+
 
             boolean correct = false;
             for (int j = 0; j < word.length(); j++) {
