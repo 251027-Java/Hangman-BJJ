@@ -1,12 +1,21 @@
 import java.util.Scanner;
-
+import java.util.Random;
 public class Hangman {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         HangmanAscii hangman = new HangmanAscii();
+        String[] words = {
+                "java", "computer", "hangman", "developer", "keyboard",
+                "internet", "software", "variable", "function", "compile",
+                "object", "class", "inheritance", "exception", "loop",
+                "array", "syntax", "algorithm", "runtime", "method",
+                "stack", "queue", "string", "integer", "boolean",
+                "package", "library", "framework", "scanner", "input"
+        };
 
-        System.out.print("Enter a word you want to be guessed: ");
-        String word = scanner.nextLine().toLowerCase();
+        Random rand = new Random();
+
+        String word = words[rand.nextInt(words.length)];
 
         char[] guessWord = new char[word.length()];
         int correctCount = 0;
