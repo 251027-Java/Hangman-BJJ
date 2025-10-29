@@ -25,16 +25,17 @@ public class Hangman {
         int correctCount = 0;
         int wrongGuesses = 1;
         int maxGuesses = 7;
-
         while (wrongGuesses < maxGuesses && correctCount < word.length()) {
             System.out.println(hangman.getHangmanArt(wrongGuesses));
             System.out.println();
-            System.out.println("Wrong guesses: " + (wrongGuesses - 1) + " / " + (maxGuesses - 1));
+
             System.out.print("Current word: ");
             for (char c : guessWord) {
                 System.out.print(c == 0 ? "_ " : c + " ");
             }
             System.out.println();
+            System.out.println("Wrong guesses: " + (wrongGuesses - 1) + " / " + (maxGuesses - 1));
+
 
             System.out.print("Enter guess: ");
             char guess = Character.toLowerCase(scanner.next().charAt(0));
