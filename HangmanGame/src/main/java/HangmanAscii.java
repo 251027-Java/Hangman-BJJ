@@ -85,11 +85,4 @@ public class HangmanAscii {
                 return "Invalid number of wrong guesses.";
         }
     }
-
-    public static void main(String[] args) {
-        // Example usage:
-        System.out.println(getHangmanArt(0)); // No wrong guesses
-        System.out.println(getHangmanArt(3)); // 3 wrong guesses
-        System.out.println(getHangmanArt(7)); // Game over
-    }
 }
