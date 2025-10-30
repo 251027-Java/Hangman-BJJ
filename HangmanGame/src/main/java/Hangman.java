@@ -25,6 +25,7 @@ public class Hangman {
         int correctCount = 0;
         int wrongGuesses = 1;
         int maxGuesses = 7;
+        Scanner scanner = new Scanner(System.in);
         char guess;
         while (wrongGuesses < maxGuesses && correctCount < word.length()) {
             System.out.println(hangman.getHangmanArt(wrongGuesses));
@@ -39,12 +40,12 @@ public class Hangman {
 
             System.out.print("Enter guess: ");
             try {
-                Scanner scanner = new Scanner(System.in);
                 String input = scanner.nextLine().toLowerCase();
                 if (input.length() != 1 || !Character.isLetter(input.charAt(0))) {
                     System.out.println("Please Enter a Single Letter");
                     continue;
                 }
+
                 guess = input.charAt(0);
                 if (guessedLetters.contains(guess)) {
                     System.out.println("⚠️ You already guessed '" + guess + "'. Try a different letter!");
@@ -68,15 +69,20 @@ public class Hangman {
 
                 if (correctCount == word.length()) {
                     System.out.println("\n🎉 You won! The word was: " + word);
+                    scanner.close();
                     return;
                 }
+
+
             } catch (Exception e) {
                 System.out.println("Exception: " + e);
+
             }
+
         }
             System.out.println(hangman.getHangmanArt(7));
             System.out.println("\n💀 You lost! The word was: " + word);
-
-
+            scanner.close();
     }
+
 }
